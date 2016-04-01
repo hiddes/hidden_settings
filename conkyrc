@@ -57,15 +57,15 @@ cpu_avg_samples 2
 TEXT
 
 # Free space on /home
-kernel: $kernel   | \
+# kernel: $kernel   | \
 uptime: $uptime | \
-/ ${fs_free /} | \
+${fs_free /} | \
 Load: ${loadavg 1} ${loadavg 2} ${loadavg 3} | \
 # Ethernet status
-# sum process
-sum/run process: $processes/$running_processes | \
+process:${running_processes}/$processes | \
 # wlan0 
-# wlan0: ${wireless_link_qual_perc wlan0}%  | \
+${if_up wlan0 wlan0: ${wireless_link_qual_perc wlan0}%  | } \
+IP: ${addr br0} | \
 D: ${downspeed eth0}/s | \
 U: ${upspeed eth0}/s | \
 #Battery
@@ -75,3 +75,9 @@ CPU ${cpu cpu1 cpu2 cpu3 cpu4 cpu5}% | \
 cup C: ${acpitemp}C | \
 RAM ${mem}/$memmax | \
 ${time %H:%M:%S} ${time %y-%m-%d--%a} | \
+
+
+# ${cpubar cpu0}
+# CPU总使用率: ${color #db7093} $alignr${cpu cpu0}%
+# CPU ${cpugraph 15,150 ff0000 00ff00}
+# ${wireless_essid wlan0}
