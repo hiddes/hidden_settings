@@ -10,6 +10,8 @@ out_to_console yes
 ## Use double buffering (reduces flicker, not needed for console output)
 double_buffer no
 
+## default_color green
+
 ## Set to yes if you want Conky to be forked in the 
 background
 background no
@@ -57,27 +59,24 @@ cpu_avg_samples 2
 TEXT
 
 # Free space on /home
-# kernel: $kernel   | \
-uptime: $uptime | \
-${fs_free /} | \
-Load: ${loadavg 1} ${loadavg 2} ${loadavg 3} | \
+# kernel: $kernel|
+${color green}uptime:$uptime_short${color}|\
+${fs_free /}|\
+Load:${loadavg 1} ${loadavg 2} ${loadavg 3}|\
 # Ethernet status
-process:${running_processes}/$processes | \
+pro:${running_processes}/$processes|\
 # wlan0 
-${if_up wlan0 wlan0: ${wireless_link_qual_perc wlan0}%  | } \
-IP: ${addr br0} | \
-D: ${downspeed eth0}/s | \
-U: ${upspeed eth0}/s | \
+${if_up wlan0}w:(${wireless_essid}:${wireless_link_qual_perc wlan0}%)|${addr wlan0}|D:${downspeed wlan0}/s|U:${upspeed wlan0}/s|${endif}\
+${if_up eth0}e:${addr eth0}|D:${downspeed eth0}/s|U:${upspeed eth0}/s|${endif} \
+${if_up br0}b:{addr br0}|D:${downspeed br0}/s|U:${upspeed br0}/s|${endif}\
 #Battery
-Battery ${battery_percent BAT0}% | \
+Bat:${battery_percent BAT0}%|\
 # CPU stats
-CPU ${cpu cpu1 cpu2 cpu3 cpu4 cpu5}% | \
-cup C: ${acpitemp}C | \
-RAM ${mem}/$memmax | \
-${time %H:%M:%S} ${time %y-%m-%d--%a} | \
+CPU:${cpu cpu0}%.${acpitemp}C|\
+RAM:${mem}/$memmax|\
+${time %H:%M:%S} ${time %y-%m-%d--%a}
 
 
 # ${cpubar cpu0}
 # CPU总使用率: ${color #db7093} $alignr${cpu cpu0}%
 # CPU ${cpugraph 15,150 ff0000 00ff00}
-# ${wireless_essid wlan0}
