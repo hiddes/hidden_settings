@@ -64,7 +64,7 @@ ${color green}uptime:$uptime_short${color}|\
 ${fs_free /}|\
 Load:${loadavg 1} ${loadavg 2} ${loadavg 3}|\
 # Ethernet status
-pro:${running_processes}/$processes|\
+# pro:${running_processes}/$processes|
 # wlan0 
 ${if_up wlan0}w:(${wireless_essid}:${wireless_link_qual_perc wlan0}%)|${addr wlan0}|D:${downspeed wlan0}/s|U:${upspeed wlan0}/s|${endif}\
 ${if_up eth0}e:${addr eth0}|D:${downspeed eth0}/s|U:${upspeed eth0}/s|${endif} \
