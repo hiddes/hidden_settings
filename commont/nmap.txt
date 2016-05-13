@@ -1,0 +1,2 @@
+cd /usr/share/nmap/scripts
+wget https://raw.githubusercontent.com/hdm/scan-tools/master/nse/banner-plus.nse
